@@ -1,7 +1,7 @@
 module Datastoreid
+  require 'active_support/concern'
   require 'active_model'
-  require 'active_support'
-  
+
   require 'datastoreid/criteria/findable'
   require 'datastoreid/criteria/queryable'
   require 'datastoreid/criteria'
