@@ -1,4 +1,5 @@
 module Datastoreid
+  require 'google/cloud'
   require 'active_support/concern'
   require 'active_model'
 
