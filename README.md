@@ -5,7 +5,7 @@ Datastoreid is an ODM (Object-Document-Mapper) framework for Google Datastore in
 Install
 -------
 ```sh
-gem build datastoreid-<version>.gem
+gem build datastoreid.gem
 gem install datastoreid-<version>.gem
 ```
 or

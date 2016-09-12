@@ -1,4 +1,4 @@
-require 'gcloud/datastore/entity'
+require 'google/cloud/datastore/entity'
 
 module Datastoreid
   # Add validations to attributes of model.
