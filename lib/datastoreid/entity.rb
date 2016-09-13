@@ -52,7 +52,7 @@ module Datastoreid
 
     class_methods do
       def datastore
-        @datastore ||= Gcloud.new.datastore
+        @datastore ||= Google::Cloud.new.datastore
       end
 
       def datastore_entity

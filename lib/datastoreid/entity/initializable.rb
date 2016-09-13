@@ -7,7 +7,7 @@ module Datastoreid
       included do
         def initialize(options = nil)
           set_default_values
-          if options.is_a? Gcloud::Datastore::Entity
+          if options.is_a? Google::Cloud::Datastore::Entity
             properties_names.each { |a| send("#{a}=", options[a.to_s]) }
             send('id=', options.key.id)
           elsif options.is_a? ::Hash
