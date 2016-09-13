@@ -10,7 +10,7 @@ gem install datastoreid-<version>.gem
 ```
 or
 ```ruby
-gem 'datastoreid', , :git => 'git://github.com/fabiotomio/datastoreid.git'
+gem 'datastoreid', '~> 0.4.0', git: 'https://github.com/fabiotomio/datastoreid'
 ```
 
 Configure
@@ -27,8 +27,8 @@ Use
 ```ruby
 # Define product model product.rb
 class Product
-  include Datastore::Entity # inject entity behaviour
-  include Datastore::Timestamps # add created and updated properties
+  include Datastoreid::Entity # inject entity behaviour
+  include Datastoreid::Timestamps # add created and updated properties
 
   kind 'Product' # Datastore Kind
 
