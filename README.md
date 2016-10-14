@@ -38,4 +38,26 @@ class Product
 
   validates :barcode, :name, :price, presence: true
 end
+
+# Example
+
+# Create and save
+product = Product.new { barcode: '7891231231234', name: 'iPhone 7', price: 3000.00 }
+product.save
+
+# Find and update
+product = Product.find 1
+product.properties = name: 'iPhone 7', price: 3000.00
+product.barcode = '7891231231234'
+product.save
+
+# Fetch all
+all_products = Product.all
+
+# Fetch all
+all_products_ordered = Product.fetch Product.query.order('name', :asc)
+
+# Fetch all
+iphones = Product.fetch Product.query.where('name', '=', 'iPhone 7')
+
 ```
