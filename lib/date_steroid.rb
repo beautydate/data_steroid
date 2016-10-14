@@ -1,0 +1,20 @@
+module DataSteroid
+  require 'google/cloud'
+  require 'active_support/concern'
+  require 'active_model'
+
+  require 'data_steroid/criteria/findable'
+  require 'data_steroid/criteria/queryable'
+  require 'data_steroid/criteria'
+  require 'data_steroid/entity/initializable'
+  require 'data_steroid/properties'
+  require 'data_steroid/persistable/creatable'
+  require 'data_steroid/persistable/deletable'
+  require 'data_steroid/persistable/savable'
+  require 'data_steroid/persistable'
+  require 'data_steroid/validatable'
+  require 'data_steroid/entity'
+  require 'data_steroid/errors/datastore_error'
+  require 'data_steroid/persistable'
+  require 'data_steroid/timestamps'
+end

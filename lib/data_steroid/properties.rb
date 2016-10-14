@@ -1,4 +1,4 @@
-module Datastoreid
+module DataSteroid
   # Define behaviour to properties of entity.
   module Properties
     extend ActiveSupport::Concern

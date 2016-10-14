@@ -1,4 +1,4 @@
-module Datastoreid
+module DataSteroid
   # Inject behaviour for poersistation operations.
   module Persistable
     extend ActiveSupport::Concern

@@ -1,6 +1,6 @@
 require 'google/cloud/datastore/entity'
 
-module Datastoreid
+module DataSteroid
   # Add validations to attributes of model.
   module Validatable
     extend ActiveSupport::Concern

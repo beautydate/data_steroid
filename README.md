@@ -1,16 +1,16 @@
-# Datastoreid
+# DataSteroid
 
-Datastoreid is an ODM (Object-Document-Mapper) framework for Google Datastore in Ruby.
+DataSteroid is an ODM (Object-Document-Mapper) framework for Google Datastore in Ruby based in Mongoid.
 
 Install
 -------
 ```sh
-gem build datastoreid.gem
-gem install datastoreid-<version>.gem
+gem build data_steroid
+gem install data_steroid-<version>.gem
 ```
 or
 ```ruby
-gem 'datastoreid', '~> 0.4.0', git: 'https://github.com/fabiotomio/datastoreid'
+gem 'data_steroid', '~> 0.4.0', git: 'https://github.com/b2beauty/data_steroid'
 ```
 
 Configure
@@ -27,12 +27,12 @@ Use
 ```ruby
 # Define product model product.rb
 class Product
-  include Datastoreid::Entity # inject entity behaviour
-  include Datastoreid::Timestamps # add created and updated properties
+  include DataSteroid::Entity # inject entity behaviour
+  include DataSteroid::Timestamps # add created and updated properties
 
   kind 'Product' # Datastore Kind
 
-  property :barcode 
+  property :barcode
   property :name
   property :price
 

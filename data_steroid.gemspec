@@ -1,12 +1,12 @@
 Gem::Specification.new do |gem|
-  gem.name        = 'datastoreid'
+  gem.name        = 'data_steroid'
   gem.version     = '0.4.0'
   gem.date        = '2016-09-12'
   gem.summary     = "Google Datastore ODM"
   gem.description = "Simple ODM to Google Datastore based on Mongoid"
   gem.authors     = ["Fabio Tomio"]
   gem.email       = 'fabiotomio@gmail.com'
-  gem.homepage    = 'http://github.com/fabiotomio/datastoreid'
+  gem.homepage    = 'http://github.com/b2beauty/data_steroid'
   gem.license     = 'MIT'
 
   gem.files        = Dir["README.md", "lib/**/*"]
