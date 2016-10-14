@@ -1,4 +1,4 @@
-module Datastoreid
+module DataSteroid
   module Criteria
     # Defines behaviour for query operations.
     module Queryable

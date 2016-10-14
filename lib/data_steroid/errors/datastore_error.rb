@@ -1,4 +1,4 @@
-module Datastoreid
+module DataSteroid
   module Errors
     class DatastoreError < StandardError
     end

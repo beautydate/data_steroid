@@ -1,4 +1,4 @@
-module Datastoreid
+module DataSteroid
   module Entity
     # Define behaviour for initialization of Entity.
     module Initializable

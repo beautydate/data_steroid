@@ -1,6 +1,6 @@
 require 'google/cloud/datastore/entity'
 
-module Datastoreid
+module DataSteroid
   # Inject behaviour for Datastore Entity.
   module Entity
     extend ActiveSupport::Concern

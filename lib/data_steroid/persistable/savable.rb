@@ -1,4 +1,4 @@
-module Datastoreid
+module DataSteroid
   module Persistable
     # Defines behaviour for save operations.
     module Savable
