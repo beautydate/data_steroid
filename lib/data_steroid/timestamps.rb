@@ -1,3 +1,5 @@
+require 'time'
+
 module DataSteroid
   # Define behaviour to created_at and updated_at data
   module Timestamps
