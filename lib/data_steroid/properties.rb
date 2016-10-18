@@ -1,56 +1,25 @@
+require 'virtus'
+
 module DataSteroid
   # Define behaviour to properties of entity.
   module Properties
     extend ActiveSupport::Concern
 
     included do
-      class_attribute :properties
+      include Virtus.model
 
-      self.properties = {}
-
-      property :id # Default property
-
-      def properties=(properties)
-        if properties.is_a? ::Hash
-          properties.each_pair { |key, value| send("#{key}=", value) }
-        else
-          raise Datastore::Errors::DatastoreError.new 'Properties params need is Hash'
-        end
-      rescue
-        raise Datastore::Errors::DatastoreError.new 'Property invalid'
+      class << self
+        alias_method :property, :attribute
       end
 
-      def properties_names
-        properties.keys
-      end
+      alias_method :properties, :attributes
 
-      def set_default_values
-        properties.each_pair do |name, options|
-          send("#{name}=", properties[name][:default]) if options.key? :default
-        end
-      end
+      attribute :id # Default attribute
     end
 
     class_methods do
-      protected
-
-      def property(name, options = {})
-        add_property(name.to_s, options)
-      end
-
-      def add_property(name, options)
-        properties[name] = options
-        create_accessors(name)
-      end
-
-      # https://www.leighhalliday.com/ruby-metaprogramming-creating-methods
-      def create_accessors(name)
-        define_method(name) do # Define get method
-          instance_variable_get("@#{name}")
-        end
-        define_method("#{name}=") do |value| # Define set method
-          instance_variable_set("@#{name}", value)
-        end
+      def properties_names
+        attribute_set.map{ |s| s.instance_variable_name.split('@')[1].to_sym }
       end
     end
   end

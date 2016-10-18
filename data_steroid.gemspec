@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name        = 'data_steroid'
-  gem.version     = '0.4.2'
+  gem.version     = '0.4.3'
   gem.date        = '2016-09-12'
   gem.summary     = "Google Datastore ODM"
   gem.description = "Simple ODM to Google Datastore based on Mongoid"
@@ -14,7 +14,8 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.3.0"
 
-  gem.add_dependency 'google-cloud-datastore', '~> 0.20'
-  gem.add_dependency 'activesupport', '~> 4.2'
   gem.add_dependency 'activemodel', '~> 4.2'
+  gem.add_dependency 'activesupport', '~> 4.2'
+  gem.add_dependency 'google-cloud-datastore', '~> 0.20'
+  gem.add_dependency 'virtus', '~> 1.0.5'
 end
