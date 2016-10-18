@@ -10,7 +10,7 @@ gem install data_steroid-<version>.gem
 ```
 or
 ```ruby
-gem 'data_steroid', '~> 0.4.0', git: 'https://github.com/b2beauty/data_steroid'
+gem 'data_steroid', '~> 0.4.2', git: 'https://github.com/b2beauty/data_steroid'
 ```
 
 Configure
