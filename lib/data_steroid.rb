@@ -17,4 +17,5 @@ module DataSteroid
   require 'data_steroid/errors/datastore_error'
   require 'data_steroid/persistable'
   require 'data_steroid/timestamps'
+  require 'data_steroid/version'
 end
