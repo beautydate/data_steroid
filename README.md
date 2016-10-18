@@ -4,13 +4,8 @@ DataSteroid is an ODM (Object-Document-Mapper) framework for Google Datastore in
 
 Install
 -------
-```sh
-gem build data_steroid
-gem install data_steroid-<version>.gem
-```
-or
 ```ruby
-gem 'data_steroid', '~> 0.4.2', git: 'https://github.com/b2beauty/data_steroid'
+gem 'data_steroid', '~> 0.4.2'
 ```
 
 Configure
@@ -42,7 +37,7 @@ end
 # Example
 
 # Create and save
-product = Product.new { barcode: '7891231231234', name: 'iPhone 7', price: 3000.00 }
+product = Product.new(barcode: '7891231231234', name: 'iPhone 7', price: 3000.00)
 product.save
 
 # Find and update
@@ -60,4 +55,12 @@ all_products_ordered = Product.fetch Product.query.order('name', :asc)
 # Fetch all
 iphones = Product.fetch Product.query.where('name', '=', 'iPhone 7')
 
+```
+
+Develop
+-------
+
+```sh
+gem build data_steroid
+gem install data_steroid-<version>.gem
 ```
