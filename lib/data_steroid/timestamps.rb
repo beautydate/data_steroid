@@ -6,8 +6,8 @@ module DataSteroid
     extend ActiveSupport::Concern
 
     included do
-      property :created_at, Time, default: DateTime.now
-      property :updated_at, time
+      property :created_at, default: ->{ DateTime.now }
+      property :updated_at
 
       before_save :set_updated_at
 
