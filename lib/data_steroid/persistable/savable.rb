@@ -16,29 +16,31 @@ module DataSteroid
             send(name)
           end
 
-          @gcloud_entity ||= self.class.datastore_entity
-
           to_gcloud.each_pair do |key, value|
             if key == 'id' && value.present?
-              @gcloud_entity.key = gcloud_key unless @gcloud_entity.persisted?
-              next
-            end
-            if value.present?
-              @gcloud_entity[key] = value
-            elsif @gcloud_entity.properties.exist? key
-              @gcloud_entity.properties.delete key
+              gcloud_entity.key = gcloud_key unless gcloud_entity.persisted?
+            elsif value.present?
+              gcloud_entity[key] = value
+            elsif gcloud_entity.properties.exist? key
+              gcloud_entity.properties.delete key
             end
           end
 
-          if (result = self.class.datastore.save(@gcloud_entity).first)
+          if (result = self.class.datastore.save(gcloud_entity).first)
             send('id=', result.key.id) if id.nil?
             true
           else
             false
           end
         end
+
+        protected
+
+        def gcloud_entity
+          @gcloud_entity ||= self.class.datastore_entity
+        end
       end
-      
+
       class_methods do
         def before_save(method)
           before_save_methods << method
