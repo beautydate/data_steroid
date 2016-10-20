@@ -66,7 +66,7 @@ module DataSteroid
 
         define_method("#{name}=") do |value| # Define set method
           coerced_value =
-            if options[:type]
+            if options[:type] && !value.nil?
               coercer[value.class].send("to_#{options[:type].to_s.downcase}", value)
             else
               value
