@@ -27,11 +27,9 @@ module DataSteroid
       end
 
       def to_gcloud
-        hash = {}
-        properties_names.each do |property|
+        properties_names.each_with_object({}) do |property, hash|
           hash[property] = type_cast_for_storage send(property)
         end
-        hash.sort.to_h
       end
 
       def to_csv
@@ -52,6 +50,7 @@ module DataSteroid
 
       protected
 
+      # Based on https://github.com/rails/rails/blob/v5.0.0.1/activerecord/lib/active_record/type_caster/map.rb
       def type_cast_for_storage(value)
         case value
         when Symbol
