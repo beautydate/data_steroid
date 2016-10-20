@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.5.0.1 (2016-10-19)
+- Fixed rubygems date
+
 ## 0.5.0 (2016-10-18)
 - Added gem Coercible for static type coercion
 
