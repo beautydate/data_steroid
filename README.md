@@ -5,7 +5,7 @@ DataSteroid is an ODM (Object-Document-Mapper) framework for Google Datastore in
 Install
 -------
 ```ruby
-gem 'data_steroid', '~> 0.4.2'
+gem 'data_steroid'
 ```
 
 Configure
@@ -28,8 +28,8 @@ class Product
   kind 'Product' # Datastore Kind
 
   property :barcode
-  property :name
-  property :price
+  property :name, String # optional type
+  property :price, Float # optional type
 
   validates :barcode, :name, :price, presence: true
 end
