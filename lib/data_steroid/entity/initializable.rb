@@ -5,13 +5,18 @@ module DataSteroid
       extend ActiveSupport::Concern
 
       included do
-        def initialize(options = nil)
+        def initialize(params = nil)
           set_default_values
-          if options.is_a? Google::Cloud::Datastore::Entity
-            properties_names.each { |a| send("#{a}=", options[a.to_s]) }
-            send('id=', options.key.id)
-          elsif options.is_a? ::Hash
-            options.each_pair { |key, value| send("#{key}=", value) }
+          case params
+          when Google::Cloud::Datastore::Entity
+            properties_names.each do |property_name|
+              send("#{property_name}=", params[property_name.to_s])
+            end
+            send('id=', params.key.id)
+          when ::Hash
+            params.each_pair do |key, value|
+              send("#{key}=", value)
+            end
           end
         end
       end
