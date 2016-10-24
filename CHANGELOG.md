@@ -1,6 +1,7 @@
 # Change Log
 
 ## Unreleased
+- Added coersion to Hash type
 - Added coersion to Array type
 
 ## 0.5.2 (2016-10-24)
