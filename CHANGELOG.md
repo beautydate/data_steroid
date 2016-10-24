@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 0.5.5 (2016-10-24)
 - Duck typing for hash
 - Fix bugs with vanilla Hash and Array types
 
