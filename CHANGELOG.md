@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.5.4 (2016-10-24)
+- Fix default for Timestamp module (Time.now)
+
 ## 0.5.3 (2016-10-24)
 - Added coersion to Hash type
 - Added coersion to Array type
