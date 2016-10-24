@@ -62,7 +62,7 @@ module DataSteroid
       def coerce_array(value, type)
         # type: generic Array
         if type == Array
-          coerce(element, type)
+          coerce_other(value, type)
         # type: Array[Something]
         elsif value.respond_to?(:map)
           value.map do |element|
@@ -76,11 +76,11 @@ module DataSteroid
       def coerce_hash(value, type)
         # type: generic Hash
         if type == Hash
-          coerce(element, type)
+          coerce_other(value, type)
         # type: Hash[Something => Other thing]
-        elsif value.is_a?(Hash)
+        elsif value.respond_to?(:to_h)
           k_type, v_type = type.to_a[0]
-          value.map{ |k, v| [ coerce(k, k_type), coerce(v, v_type) ] }.to_h
+          value.to_h.map{ |k,v| [ coerce(k, k_type), coerce(v, v_type) ] }.to_h
         else
           raise ArgumentError.new "Invalid coercion: #{value.class} => #{type}"
         end
@@ -107,7 +107,7 @@ module DataSteroid
       # or like this:
       #   property :time_field, type: Time, default: -> { Time.now }
       def add_property(name, *args)
-        options = args[-1].is_a?(Hash) ? args[-1] : {}
+        options = args[-1].is_a?(Hash) ? args[-1].slice(:default, :type) : {}
         options[:type] = args[0] if args[0] && !(args[0].is_a?(Hash) && args[0].key?(:default))
         properties[name.to_s] = options
         create_accessors(name, options)

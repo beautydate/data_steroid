@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+- Duck typing for hash
+- Fix bugs with vanilla Hash and Array types
+
 ## 0.5.4 (2016-10-24)
 - Fix default for Timestamp module (Time.now)
 
