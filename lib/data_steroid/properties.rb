@@ -45,6 +45,49 @@ module DataSteroid
       def coercer
         @coercer ||= Coercible::Coercer.new
       end
+
+      def coerce(value, type)
+        if value.nil? || !options[:type]
+          value
+        else
+          case options[:type]
+          when Array then coerce_array(value, options[:type])
+          when Time  then coerce_time(value)
+          else coerce_other(value, options[:type])
+          end
+        end
+      end
+
+      def coerce_array(value, type)
+        # type: generic Array
+        if type == Array
+          element
+        # type: Array[Something]
+        elsif value.respond_to?(:map)
+          value.map do |element|
+            coerce(element, type[0])
+          end
+        else
+          value
+        end
+      end
+
+      def coerce_time(value)
+        case value
+        when Integer then Time.at(value)
+        when String then Time.parse(value)
+        else value
+        end
+      end
+
+      def coerce_other(value, type)
+        case value
+        when Array
+          raise ArgumentError.new "Unsupported type: #{value.class}"
+        else
+          coercer[value.class].send("to_#{type.to_s.downcase}", simple_value)
+        end
+      end
     end
 
     class_methods do
@@ -65,13 +108,7 @@ module DataSteroid
         end
 
         define_method("#{name}=") do |value| # Define set method
-          coerced_value =
-            if options[:type] && !value.nil?
-              coercer[value.class].send("to_#{options[:type].to_s.downcase}", value)
-            else
-              value
-            end
-          instance_variable_set("@#{name}", coerced_value)
+          instance_variable_set("@#{name}", coerce(value, options[:type]))
         end
       end
     end

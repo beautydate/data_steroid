@@ -1,5 +1,8 @@
 # Change Log
 
+## Unreleased
+- Added coersion to Array type
+
 ## 0.5.2 (2016-10-24)
 - Switched timestamps from DateTime to Time for simpler usage with gRPC int32. Nowadays [Time has most capabilities of Datetime anyway](http://stackoverflow.com/questions/1261329/whats-the-difference-between-datetime-and-time-in-ruby#answer-1261435). Besides, 
 
