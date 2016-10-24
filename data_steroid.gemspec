@@ -1,7 +1,7 @@
 Gem::Specification.new do |gem|
   gem.name        = 'data_steroid'
-  gem.version     = '0.5.1'
-  gem.date        = '2016-10-20'
+  gem.version     = '0.5.2'
+  gem.date        = '2016-10-24'
   gem.summary     = "Google Datastore ODM"
   gem.description = "Simple ODM to Google Datastore based on Mongoid"
   gem.authors     = ["Fabio Tomio"]
