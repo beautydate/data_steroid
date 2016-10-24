@@ -102,9 +102,13 @@ module DataSteroid
     class_methods do
       protected
 
+      # Type might be defined like this:
+      #   property :time_field, Time, default: -> { Time.now }
+      # or like this:
+      #   property :time_field, type: Time, default: -> { Time.now }
       def add_property(name, *args)
-        options = args[-1].is_a?(Hash) ? args[-1].slice(:default) : {}
-        options[:type] = args[0] if args[0]
+        options = args[-1].is_a?(Hash) ? args[-1] : {}
+        options[:type] = args[0] if args[0] && !(args[0].is_a?(Hash) && args[0].key?(:default))
         properties[name.to_s] = options
         create_accessors(name, options)
         self
