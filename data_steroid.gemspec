@@ -1,6 +1,8 @@
+require File.expand_path('../lib/data_steroid/version', __FILE__)
+
 Gem::Specification.new do |gem|
   gem.name        = 'data_steroid'
-  gem.version     = '0.5.5'
+  gem.version     = DataSteroid::VERSION
   gem.date        = '2016-10-24'
   gem.summary     = "Google Datastore ODM"
   gem.description = "Simple ODM to Google Datastore based on Mongoid"
