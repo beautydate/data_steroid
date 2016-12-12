@@ -1,0 +1,21 @@
+version: "2"
+services:
+  data_steroid:
+    build:
+      context: .
+      dockerfile: Dockerfile.development
+    command: bash
+    #env_file: .env
+    volumes:
+      - .:/app
+    links:
+      - datastore
+    environment:
+      - DATASTORE_HOST=datastore:8181
+      - DATASTORE_EMULATOR_HOST=datastore:8181
+      - GCLOUD_PROJECT=test
+
+  datastore:
+    image: vyper/gcd-grpc
+    ports:
+      - "8181:8181"
