@@ -11,7 +11,7 @@ end
 RSpec.describe ProductTest, type: :model do
   before :each do
     # TODO: clear database before suite
-    ProductTest.all.each { |e| e.delete }
+    clear_datastore_kind(ProductTest)
   end
 
   it 'Save' do

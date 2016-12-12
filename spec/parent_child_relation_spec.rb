@@ -15,8 +15,14 @@ class ChildEntity
 end
 
 RSpec.describe 'Parent/child relations' do
+  let(:parent) { ParentEntity.new(name: 'parent 1') }
+
+  before(:each) do
+    clear_datastore_kind(ParentEntity)
+    clear_datastore_kind(ChildEntity)
+  end
+
   context 'key formation' do
-    let(:parent) { ParentEntity.new(name: 'parent 1') }
     it '#as_parent_key' do
       expect(parent.respond_to?(:as_parent_key)).to be_truthy
     end
@@ -37,20 +43,36 @@ RSpec.describe 'Parent/child relations' do
     end
 
     it 'pass parent' do
-      expect(parent).to receive(:persisted?).and_return(true)
-      expect(parent).to receive(:gcloud_key).and_return(:parent_key)
-
-      expect(ChildEntity.datastore).to receive(:key).with(ChildEntity.kind, nil, :parent_key).and_return(:child_key)
+      parent.id = 123
+      expect(ChildEntity.datastore).to receive(:key).with(["ParentEntity", 123], ["ChildEntity", nil]).and_return(:child_key)
 
       key = ChildEntity.new(name: 'child', parent: parent).gcloud_key
       expect(key).to eq(:child_key)
     end
 
     it 'without parent' do
-      expect(ChildEntity.datastore).to receive(:key).with(ChildEntity.kind, nil).and_return(:child_key)
+      expect(ChildEntity.datastore).to receive(:key).with([ChildEntity.kind, nil]).and_return(:child_key)
 
       key = ChildEntity.new(name: 'child').gcloud_key
       expect(key).to eq(:child_key)
+    end
+  end
+
+  context 'integration' do
+    context 'persist' do
+      before(:each) do
+        parent.save
+      end
+
+      it 'persist' do
+        child  = ChildEntity.new(name: 'child 1', parent: parent).tap { |e| e.save }
+        child2 = ChildEntity.new(name: 'child 2').tap { |e| e.save }
+
+        qry = ChildEntity.query.ancestor(parent.as_parent_key).where('name', '=', child.name)
+        res = ChildEntity.fetch qry
+        expect(res.count).to eq(1)
+        expect(res.first.name).to eq(child.name)
+      end
     end
   end
 end

@@ -25,8 +25,8 @@ module DataSteroid
       end
 
       def gcloud_key
-        params = [kind, id]
-        params << parent.as_parent_key if parent.present?
+        params = [[kind, id]]
+        params.unshift [parent.class.kind, parent.id] if parent.present?
         self.class.datastore.key(*params)
       end
 
