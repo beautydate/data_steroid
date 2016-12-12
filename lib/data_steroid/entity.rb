@@ -18,12 +18,16 @@ module DataSteroid
 
       class_attribute :kind
 
+      attr_accessor :parent
+
       def persisted?
         id.present?
       end
 
       def gcloud_key
-        self.class.datastore.key(kind, id)
+        params = [kind, id]
+        params << parent.as_parent_key if parent.present?
+        self.class.datastore.key(*params)
       end
 
       def as_parent_key
