@@ -73,6 +73,25 @@ RSpec.describe 'Parent/child relations' do
         expect(res.count).to eq(1)
         expect(res.first.name).to eq(child.name)
       end
+
+      it 'delete child from parent' do
+        child  = ChildEntity.new(name: 'child to delete', parent: parent).tap { |e| e.save }
+
+        qry = ChildEntity.query.ancestor(parent.as_parent_key).where('name', '=', child.name)
+        res = ChildEntity.fetch qry
+        expect(res.count).to eq(1)
+        expect(res.first.name).to eq(child.name)
+
+        child.delete
+
+        qry = ChildEntity.query.ancestor(parent.as_parent_key).where('name', '=', child.name)
+        res = ChildEntity.fetch qry
+        expect(res.count).to eq(0)
+
+        qry = ChildEntity.query.where('name', '=', child.name)
+        res = ChildEntity.fetch qry
+        expect(res.count).to eq(0)
+      end
     end
   end
 end
