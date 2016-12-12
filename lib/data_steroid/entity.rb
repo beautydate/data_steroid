@@ -26,6 +26,11 @@ module DataSteroid
         self.class.datastore.key(kind, id)
       end
 
+      def as_parent_key
+        raise DataSteroid::Errors::InvalidRecord.new('parent not persisted') unless persisted?
+        gcloud_key
+      end
+
       def to_gcloud
         properties_names.each_with_object({}) do |property, hash|
           hash[property] = type_cast_for_storage send(property)
