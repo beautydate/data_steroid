@@ -18,12 +18,19 @@ module DataSteroid
 
       class_attribute :kind
 
+      attr_accessor :parent
+
       def persisted?
         id.present?
       end
 
       def gcloud_key
-        self.class.datastore.key(kind, id)
+        self.class.gcloud_key(id, parent: parent)
+      end
+
+      def as_parent_key
+        raise DataSteroid::Errors::InvalidRecord.new('parent not persisted') unless persisted?
+        gcloud_key
       end
 
       def to_gcloud
@@ -70,10 +77,14 @@ module DataSteroid
         datastore.entity kind
       end
 
-      protected
+      def create(*params)
+        new(*params).tap(&:save)
+      end
 
-      def gcloud_key(id)
-        datastore.key(kind, id)
+      def gcloud_key(id, parent: nil)
+        params = [[kind, id]]
+        params.unshift [parent.class.kind, parent.id] if parent.present?
+        datastore.key(*params)
       end
     end
   end

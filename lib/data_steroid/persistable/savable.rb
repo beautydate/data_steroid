@@ -17,7 +17,7 @@ module DataSteroid
           end
 
           to_gcloud.each_pair do |key, value|
-            if key == 'id' && value.present?
+            if key == 'id' && (value.present? || parent.present?)
               gcloud_entity.key = gcloud_key unless gcloud_entity.persisted?
             elsif value.present?
               gcloud_entity[key] = value
