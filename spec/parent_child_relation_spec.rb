@@ -59,7 +59,7 @@ RSpec.describe 'Parent/child relations' do
   end
 
   context 'integration' do
-    context 'persist' do
+    context 'persistance' do
       before(:each) do
         parent.save
       end
@@ -91,6 +91,16 @@ RSpec.describe 'Parent/child relations' do
         qry = ChildEntity.query.where('name', '=', child.name)
         resources = ChildEntity.fetch qry
         expect(resources.count).to eq(0)
+      end
+
+      it 'finds child with parent by id' do
+        child  = ChildEntity.create(name: 'child to find', parent: parent)
+
+        resource = ChildEntity.find(child.id)
+        expect(resource).to be_nil
+
+        resource = ChildEntity.find(child.id, parent: parent)
+        expect(child.name).to eq(resource.name)
       end
     end
   end

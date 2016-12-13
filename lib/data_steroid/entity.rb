@@ -25,9 +25,7 @@ module DataSteroid
       end
 
       def gcloud_key
-        params = [[kind, id]]
-        params.unshift [parent.class.kind, parent.id] if parent.present?
-        self.class.datastore.key(*params)
+        self.class.gcloud_key(id, parent: parent)
       end
 
       def as_parent_key
@@ -79,10 +77,14 @@ module DataSteroid
         datastore.entity kind
       end
 
-      protected
+      def create(*params)
+        new(*params).tap(&:save)
+      end
 
-      def gcloud_key(id)
-        datastore.key(kind, id)
+      def gcloud_key(id, parent: nil)
+        params = [[kind, id]]
+        params.unshift [parent.class.kind, parent.id] if parent.present?
+        datastore.key(*params)
       end
     end
   end
