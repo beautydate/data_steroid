@@ -64,33 +64,33 @@ RSpec.describe 'Parent/child relations' do
         parent.save
       end
 
-      it 'persist' do
+      it 'persists' do
         child  = ChildEntity.new(name: 'child 1', parent: parent).tap { |e| e.save }
         child2 = ChildEntity.new(name: 'child 2').tap { |e| e.save }
 
         qry = ChildEntity.query.ancestor(parent.as_parent_key).where('name', '=', child.name)
-        res = ChildEntity.fetch qry
-        expect(res.count).to eq(1)
-        expect(res.first.name).to eq(child.name)
+        resources = ChildEntity.fetch qry
+        expect(resources.count).to eq(1)
+        expect(resources.first.name).to eq(child.name)
       end
 
-      it 'delete child from parent' do
+      it 'deletes child from parent' do
         child  = ChildEntity.new(name: 'child to delete', parent: parent).tap { |e| e.save }
 
         qry = ChildEntity.query.ancestor(parent.as_parent_key).where('name', '=', child.name)
-        res = ChildEntity.fetch qry
-        expect(res.count).to eq(1)
-        expect(res.first.name).to eq(child.name)
+        resources = ChildEntity.fetch qry
+        expect(resources.count).to eq(1)
+        expect(resources.first.name).to eq(child.name)
 
         child.delete
 
         qry = ChildEntity.query.ancestor(parent.as_parent_key).where('name', '=', child.name)
-        res = ChildEntity.fetch qry
-        expect(res.count).to eq(0)
+        resources = ChildEntity.fetch qry
+        expect(resources.count).to eq(0)
 
         qry = ChildEntity.query.where('name', '=', child.name)
-        res = ChildEntity.fetch qry
-        expect(res.count).to eq(0)
+        resources = ChildEntity.fetch qry
+        expect(resources.count).to eq(0)
       end
     end
   end

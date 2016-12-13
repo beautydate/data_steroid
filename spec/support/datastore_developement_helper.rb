@@ -1,6 +1,6 @@
 module DatastoreDevelopementHelper
   def clear_datastore_kind(kind)
-    kind.all.each { |k| k.delete }
+    kind.all.each(&:delete)
   end
 end
 

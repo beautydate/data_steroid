@@ -15,27 +15,27 @@ RSpec.describe ProductTest, type: :model do
     clear_datastore_kind(ProductTest)
   end
 
-  it 'Save' do
+  it 'saves' do
     expect(product.save).to be_truthy
 
-    res = ProductTest.fetch ProductTest.query.where('name', '=', 'iPhone XYZ')
-    expect(res.count).to eq(1)
+    resources = ProductTest.fetch ProductTest.query.where('name', '=', 'iPhone XYZ')
+    expect(resources.count).to eq(1)
 
-    p1 = res.first
+    p1 = resources.first
     expect(p1.name).to eq(product.name)
     expect(p1.price).to eq(product.price)
   end
 
-  it 'delete' do
+  it 'deletes' do
     product.save
 
-    res = ProductTest.fetch ProductTest.query.where('name', '=', 'iPhone XYZ')
-    expect(res.count).to eq(1)
+    resources = ProductTest.fetch ProductTest.query.where('name', '=', 'iPhone XYZ')
+    expect(resources.count).to eq(1)
 
     product.delete
 
-    res = ProductTest.fetch ProductTest.query.where('name', '=', 'iPhone XYZ')
-    expect(res.count).to eq(0)
+    resources = ProductTest.fetch ProductTest.query.where('name', '=', 'iPhone XYZ')
+    expect(resources.count).to eq(0)
   end
 
   it 'find by id' do

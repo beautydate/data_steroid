@@ -19,5 +19,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'activemodel', '~> 4.2'
   gem.add_dependency 'activesupport', '~> 4.2'
   gem.add_dependency 'coercible', '~> 1.0'
-  gem.add_dependency 'google-cloud-datastore', '~> 0.20'
+  gem.add_dependency 'google-cloud-datastore', '~> 0.23'
 end
