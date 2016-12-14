@@ -16,8 +16,8 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.3.0"
 
-  gem.add_dependency 'activemodel', '~> 4.2'
-  gem.add_dependency 'activesupport', '~> 4.2'
+  gem.add_dependency 'activemodel', '~> 5.0'
+  gem.add_dependency 'activesupport', '~> 5.0'
   gem.add_dependency 'coercible', '~> 1.0'
   gem.add_dependency 'google-cloud-datastore', '~> 0.23'
 end

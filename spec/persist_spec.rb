@@ -41,8 +41,8 @@ RSpec.describe ProductTest, type: :model do
   it 'find by id' do
     product.save
 
-    p = ProductTest.find(product.id)
+    new_product = ProductTest.find(product.id)
 
-    expect(p.name).to eq(product.name)
+    expect(new_product.name).to eq(product.name)
   end
 end
