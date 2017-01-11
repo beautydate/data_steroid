@@ -12,7 +12,7 @@ module DataSteroid
             properties_names.each do |property_name|
               send("#{property_name}=", params[property_name.to_s])
             end
-            send('id=', params.key.id)
+            send('id=', params.key.id || params.key.name)
           when ::Hash
             params.each_pair do |key, value|
               send("#{key}=", value)

@@ -27,7 +27,7 @@ module DataSteroid
           end
 
           if (result = self.class.datastore.save(gcloud_entity).first)
-            send('id=', result.key.id) if id.nil?
+            send('id=', result.key.id || result.key.name) if id.nil?
             true
           else
             false
